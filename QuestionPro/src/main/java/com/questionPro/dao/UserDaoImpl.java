@@ -11,7 +11,6 @@ import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
-@Transactional
 public class UserDaoImpl implements UserDao{
 
     @Autowired
@@ -25,4 +24,5 @@ public class UserDaoImpl implements UserDao{
         }
 
     }
+
 }

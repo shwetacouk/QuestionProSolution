@@ -29,6 +29,9 @@ public class ClientServiceImpl {
     @Value("#{'${userData.service.base.url}'}")
     protected String userDataBaseUrl;
 
+    @Value("#{'${topStories.service.base.url}'}")
+    protected String topStoriesBaseUrl;
+
     public ClientServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
@@ -81,4 +84,20 @@ public class ClientServiceImpl {
     }
 
 
+    public String[] getTopStories() throws ClientCallException {
+        ResponseEntity<String[]> responseEntity;
+        try {
+            responseEntity = restTemplate.getForEntity(URI.create(format(topStoriesBaseUrl)),
+                    String[].class);
+        } catch (Exception exc) {
+            throw new ClientCallException(EventCode.Application.ERROR_IN_BEST_FETCHING_STORYID);
+        }
+        if (responseEntity != null &&
+                HttpStatus.Series.valueOf(responseEntity.getStatusCode()).equals(HttpStatus.Series.SUCCESSFUL)) {
+            String[] bestStoryIds =responseEntity.getBody();
+            return bestStoryIds;
+        } else {
+            throw new ClientCallException(EventCode.Application.ERROR_IN_BEST_FETCHING_STORYID);
+        }
+    }
 }

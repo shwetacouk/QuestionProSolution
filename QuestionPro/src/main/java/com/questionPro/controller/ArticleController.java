@@ -3,6 +3,7 @@ package com.questionPro.controller;
 import com.questionPro.exception.ClientCallException;
 import com.questionPro.model.response.BestStoryResponse;
 import com.questionPro.service.ArticleService;
+import com.questionPro.service.ArticleServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -30,10 +31,10 @@ public class ArticleController {
         return responses;
     }
 
-    @RequestMapping(value = "/past-stories ", method = RequestMethod.GET)
-    public List<String> getFestStory(){
-
-        return null;
+    @RequestMapping(value = "/past-stories", method = RequestMethod.GET)
+    public String[] getFestStory() throws InterruptedException, ClientCallException {
+        String[] response = articleService.fetchTopStories();
+        return response;
     }
 
     /*@RequestMapping(value = "/comments", method = RequestMethod.GET)

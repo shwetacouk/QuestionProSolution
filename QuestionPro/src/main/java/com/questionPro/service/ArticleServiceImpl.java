@@ -33,6 +33,12 @@ public class ArticleServiceImpl implements ArticleService {
         return userDetails;
     }
 
+    @Override
+    public String[] fetchTopStories() throws ClientCallException, InterruptedException {
+        String[] bestStoryIds =clientService.getBestStoryIds();
+        return bestStoryIds;
+    }
+
     private List<BestStoryResponse> getDetailsById(String[] ids) throws ClientCallException {
         List<BestStoryResponse> userDetails = clientService.getUserDetailsById(ids);
         return userDetails;

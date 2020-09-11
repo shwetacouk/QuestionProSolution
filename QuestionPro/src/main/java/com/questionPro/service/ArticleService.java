@@ -9,4 +9,5 @@ import java.util.List;
 public interface ArticleService {
 
     List<BestStoryResponse> fetchBestStoriesOnScore() throws ClientCallException, InterruptedException;
+    String[] fetchTopStories() throws ClientCallException, InterruptedException;
 }
