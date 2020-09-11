@@ -1,6 +1,7 @@
 package com.questionPro.service;
 
 import com.questionPro.client.ClientServiceImpl;
+import com.questionPro.dao.UserDao;
 import com.questionPro.dao.UserDaoImpl;
 import com.questionPro.exception.ClientCallException;
 import com.questionPro.model.response.BestStoryResponse;
@@ -18,7 +19,7 @@ public class ArticleServiceImpl implements ArticleService {
     private ClientServiceImpl clientService;
 
     @Autowired
-    private UserDaoImpl userDao;
+    private UserDao userDao;
 
     @Override
     @Cacheable(value = "best-stories", key = "#root.methodName")

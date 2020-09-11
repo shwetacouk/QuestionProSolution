@@ -3,6 +3,7 @@ package com.questionPro.dao;
 import com.questionPro.model.response.BestStoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,6 +11,7 @@ import javax.persistence.PersistenceContextType;
 import java.util.List;
 
 @Repository
+@Transactional
 public class UserDaoImpl implements UserDao{
 
     @Autowired
@@ -18,6 +20,9 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public void saveUserDetails(List<BestStoryResponse> userDetails) {
-            //entityManager.merge();
+        for (BestStoryResponse user: userDetails) {
+            entityManager.merge(user);
+        }
+
     }
 }
